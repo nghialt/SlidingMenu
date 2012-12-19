@@ -107,8 +107,8 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	/**
-	 * 
-	 * @param b Whether or not the SlidingMenu is in a static mode 
+	 *
+	 * @param b Whether or not the SlidingMenu is in a static mode
 	 * (i.e. nothing is moving and everything is showing)
 	 */
 	public void setStatic(boolean b) {
@@ -116,7 +116,7 @@ public class SlidingMenu extends RelativeLayout {
 			setSlidingEnabled(false);
 			mViewAbove.setCustomViewBehind2(null);
 			mViewAbove.setCurrentItem(1);
-			mViewBehind.setCurrentItem(0);	
+			mViewBehind.setCurrentItem(0);
 		} else {
 			mViewAbove.setCurrentItem(1);
 			mViewBehind.setCurrentItem(1);
@@ -140,7 +140,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return Whether or not the behind view is showing
 	 */
 	public boolean isBehindShowing() {
@@ -148,7 +148,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return The margin on the right of the screen that the behind view scrolls to
 	 */
 	public int getBehindOffset() {
@@ -156,7 +156,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param i The margin on the right of the screen that the behind view scrolls to
 	 */
 	public void setBehindOffset(int i) {
@@ -168,7 +168,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param res The dimension resource to be set as the behind offset
 	 */
 	public void setBehindOffsetRes(int res) {
@@ -177,7 +177,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return The scale of the parallax scroll
 	 */
 	public float getBehindScrollScale() {
@@ -185,7 +185,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param f The scale of the parallax scroll (i.e. 1.0f scrolls 1 pixel for every
 	 * 1 pixel that the above view scrolls and 0.0f scrolls 0 pixels)
 	 */
@@ -244,6 +244,7 @@ public class SlidingMenu extends RelativeLayout {
 			super(superState);
 		}
 
+		@Override
 		public void writeToParcel(Parcel out, int flags) {
 			super.writeToParcel(out, flags);
 			out.writeBooleanArray(new boolean[]{mBehindShowing});
@@ -252,10 +253,12 @@ public class SlidingMenu extends RelativeLayout {
 		public static final Parcelable.Creator<SavedState> CREATOR
 		= ParcelableCompat.newCreator(new ParcelableCompatCreatorCallbacks<SavedState>() {
 
+			@Override
 			public SavedState createFromParcel(Parcel in, ClassLoader loader) {
 				return new SavedState(in);
 			}
 
+			@Override
 			public SavedState[] newArray(int size) {
 				return new SavedState[size];
 			}
@@ -270,6 +273,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 
+	@Override
 	public Parcelable onSaveInstanceState() {
 		Parcelable superState = super.onSaveInstanceState();
 		SavedState ss = new SavedState(superState);
@@ -278,6 +282,7 @@ public class SlidingMenu extends RelativeLayout {
 	}
 
 
+	@Override
 	public void onRestoreInstanceState(Parcelable state) {
 		if (!(state instanceof SavedState)) {
 			super.onRestoreInstanceState(state);
@@ -338,4 +343,11 @@ public class SlidingMenu extends RelativeLayout {
 		return statusBarHeight;
 	}
 
+	public CustomViewAbove getViewAbove() {
+		return mViewAbove;
+	}
+
+	public void setViewAbove(CustomViewAbove mViewAbove) {
+		this.mViewAbove = mViewAbove;
+	}
 }
